@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 
 export const createJobPost = async (JobPostPayload) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/job/create`;
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/job/create`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.post(reqUrl, JobPostPayload);
@@ -19,7 +19,7 @@ export const createJobPost = async (JobPostPayload) => {
 
 export const getJobPostById = async (jobPostId) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/job/job-details/${jobPostId}`;
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/job/job-details/${jobPostId}`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.get(reqUrl);
@@ -31,7 +31,7 @@ export const getJobPostById = async (jobPostId) => {
 
 export const updateJobPostById = async (jobPostId, updatedFormData, userId) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/job/update/${jobPostId}`;
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/job/update/${jobPostId}`;
     const token = localStorage.getItem("token");
     axios.defaults.headers.common["Authorization"] = token;
     const response = await axios.put(reqUrl, {
@@ -47,7 +47,7 @@ export const updateJobPostById = async (jobPostId, updatedFormData, userId) => {
 
 export const getAllJobs = async (filter) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/job/all?title=${
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/job/all?title=${
       filter?.title || ""
     }&skills=${filter?.skills || ""}`;
     debugger;

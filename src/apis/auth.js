@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const registerUser = async ({ email, password, mobile, name }) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/auth/register`;
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/auth/register`;
     const response = await axios.post(reqUrl, {
       email,
       password,
@@ -18,7 +18,7 @@ export const registerUser = async ({ email, password, mobile, name }) => {
 
 export const loginUser = async ({ email, password }) => {
   try {
-    const reqUrl = `${process.env.backendUrl}/auth/login`;
+    const reqUrl = `${process.env.REACT_APP_BACKEND_URL}/auth/login`;
     const response = await axios.post(reqUrl, {
       email,
       password,
