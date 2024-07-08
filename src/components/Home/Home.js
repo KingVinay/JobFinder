@@ -186,7 +186,7 @@ export default function Home() {
                   }}
                   className={styles.view}
                 >
-                  Edit Jobs
+                  Edit Job
                 </button>
               )}
               <button
