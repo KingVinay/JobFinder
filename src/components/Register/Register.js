@@ -93,6 +93,12 @@ export default function Register() {
           Sign in
         </span>
       </p>
+      <p className={styles.footer}>
+        <span className={styles.grey}>Want to checkout Jobs?</span>
+        <span className={styles.underline} onClick={() => navigate("/")}>
+          Home
+        </span>
+      </p>
     </div>
   );
 }

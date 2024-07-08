@@ -53,8 +53,18 @@ export default function Home() {
             </button>
           ) : (
             <>
-              <button className={styles.login}>Login</button>
-              <button className={styles.register}>Register</button>
+              <button
+                onClick={() => navigate("/login")}
+                className={styles.login}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => navigate("/register")}
+                className={styles.register}
+              >
+                Register
+              </button>
             </>
           )}
         </div>
