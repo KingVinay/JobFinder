@@ -22,6 +22,8 @@ export default function JobDetails() {
     setJobDetails(result?.jobDetails);
     if (jobDetails.refUserId === userId) {
       setIsEditable(true);
+    } else {
+      setIsEditable(false);
     }
   };
 

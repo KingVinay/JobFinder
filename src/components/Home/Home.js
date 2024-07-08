@@ -13,6 +13,7 @@ export default function Home() {
   const [skills, setSkills] = useState([]);
   const [title, setTitle] = useState();
   const [token] = useState(!!localStorage.getItem("token"));
+  const userId = localStorage.getItem("userID");
 
   const handleLogout = () => {
     localStorage.clear();
@@ -173,7 +174,7 @@ export default function Home() {
               })}
             </div>
             <div className={styles.btnGroup2}>
-              {token && (
+              {token && data?.refUserId === userId && (
                 <button
                   onClick={() => {
                     navigate("/job-post", {
