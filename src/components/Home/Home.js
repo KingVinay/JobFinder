@@ -5,7 +5,7 @@ import { CiSearch } from "react-icons/ci";
 import { MdOutlinePeople } from "react-icons/md";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import styles from "./Home.module.css";
-import { getAllJobs } from "../../api/job";
+import { getAllJobs, deleteJobPost } from "../../api/job";
 
 export default function Home() {
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ export default function Home() {
   const [skills, setSkills] = useState([]);
   const [title, setTitle] = useState();
   const [token] = useState(!!localStorage.getItem("token"));
-  const userId = localStorage.getItem("userID");
+  const userId = JSON.parse(localStorage.getItem("userId"));
 
   const handleLogout = () => {
     localStorage.clear();
@@ -23,6 +23,19 @@ export default function Home() {
   const fetchAllJobs = async () => {
     const result = await getAllJobs({ title: title, skills: skills });
     setJobs(result);
+  };
+
+  const deleteJob = async (jobId) => {
+    await deleteJobPost(jobId);
+    handleDeleteJob(jobId);
+  };
+
+  const handleDeleteJob = (jobId) => {
+    setJobs((jobs) => {
+      const updatedJobs = jobs.filter((job) => job._id !== jobId);
+
+      return updatedJobs;
+    });
   };
 
   const handleSkill = (event) => {
@@ -175,19 +188,27 @@ export default function Home() {
             </div>
             <div className={styles.btnGroup2}>
               {token && data?.refUserId === userId && (
-                <button
-                  onClick={() => {
-                    navigate("/job-post", {
-                      state: {
-                        jobDetails: data,
-                        edit: true,
-                      },
-                    });
-                  }}
-                  className={styles.view}
-                >
-                  Edit Job
-                </button>
+                <>
+                  <button
+                    onClick={() => {
+                      navigate("/job-post", {
+                        state: {
+                          jobDetails: data,
+                          edit: true,
+                        },
+                      });
+                    }}
+                    className={styles.view}
+                  >
+                    Edit Job
+                  </button>
+                  <button
+                    onClick={() => deleteJob(data._id)}
+                    className={styles.view}
+                  >
+                    Delete
+                  </button>
+                </>
               )}
               <button
                 onClick={() => navigate(`/job-details/${data._id}`)}

@@ -36,6 +36,18 @@ export const updateJobPostById = async (jobPostId, updatedFormData) => {
   }
 };
 
+export const deleteJobPost = async (jobId) => {
+  try {
+    const reqUrl = `${backendUrl}/delete/${jobId}`;
+    const token = JSON.parse(localStorage.getItem("token"));
+    axios.defaults.headers.common["Authorization"] = token;
+    await axios.delete(reqUrl);
+  } catch (error) {
+    console.log(error);
+    alert("Something went wrong");
+  }
+};
+
 export const getAllJobs = async (filter) => {
   try {
     const reqUrl = `${backendUrl}/all?searchQuery=${
